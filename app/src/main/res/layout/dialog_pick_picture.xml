@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btn_photo"
+        android:layout_width="0dp"
+        android:layout_height="160dp"
+        android:layout_weight="1"
+        android:background="@color/green"
+        android:text="拍  照"
+        android:textSize="@dimen/text_size_90"/>
+
+    <Button
+        android:id="@+id/btn_album"
+        android:layout_width="0dp"
+        android:layout_height="160dp"
+        android:layout_weight="1"
+        android:background="@color/red"
+        android:text="相  册"
+        android:textSize="@dimen/text_size_90"/>
+
+</LinearLayout>

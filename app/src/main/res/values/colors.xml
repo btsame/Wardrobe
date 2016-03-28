@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="colorSpring">#07f0f0</color>
+    <color name="colorSummer">#e73819</color>
+    <color name="colorAutumn">#e6ff40</color>
+    <color name="colorWinter">#f2efef</color>
+
+    <color name="black_translucent">#60000000</color>
+    <color name="red">#ff0000</color>
+    <color name="green">#00ff00</color>
+    <color name="orange">#ff8000</color>
+    <color name="orange_inverse">#007fff</color>
+
+    <color name="darkgray">#cccccc</color>
+</resources>
