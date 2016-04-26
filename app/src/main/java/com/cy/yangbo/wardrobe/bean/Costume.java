@@ -1,7 +1,5 @@
 package com.cy.yangbo.wardrobe.bean;
 
-import java.util.Date;
-
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
@@ -12,18 +10,18 @@ import io.realm.annotations.Required;
 public class Costume extends RealmObject {
 
     @PrimaryKey
-    private long id;
+    private String id;
     private String sort_part;
     @Required
     private String pic;
     private String remark;
-    private Date create_time;
+    private String create_time;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -51,11 +49,11 @@ public class Costume extends RealmObject {
         this.remark = remark;
     }
 
-    public Date getCreate_time() {
+    public String getCreate_time() {
         return create_time;
     }
 
-    public void setCreate_time(Date create_time) {
+    public void setCreate_time(String create_time) {
         this.create_time = create_time;
     }
 }

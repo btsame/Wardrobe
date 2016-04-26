@@ -4,9 +4,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +22,7 @@ import com.cy.yangbo.wardrobe.comm.BaseActivity;
 import com.cy.yangbo.wardrobe.presenter.WeatherPresenter;
 import com.cy.yangbo.wardrobe.view.inter.WeatherView;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.jakewharton.rxbinding.view.RxView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +57,10 @@ public class WeatherActivity extends BaseActivity implements WeatherView {
     View mBottomSheetView;
     @Bind(R.id.rv_weather_detail)
     RecyclerView mDetailRV;
+    @Bind(R.id.iv_weather_refresh)
+    ImageView mRefresh;
+    @Bind(R.id.toolbar)
+    Toolbar mToolbar;
 
 
     @Override
@@ -65,6 +74,41 @@ public class WeatherActivity extends BaseActivity implements WeatherView {
         setContentView(R.layout.activity_weather);
         ButterKnife.bind(this);
 
+        setSupportActionBar(mToolbar);
+        mToolbar.setNavigationIcon(R.drawable.icon_back);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        queryWeather();
+    }
+
+    @Override
+    protected void initView() {
+        super.initView();
+    }
+
+    @Override
+    protected void setListener() {
+        super.setListener();
+
+        RxView.clicks(mRefresh).subscribe(new Action1<Void>() {
+            @Override
+            public void call(Void aVoid) {
+                queryWeather();
+            }
+        });
+    }
+
+    /**
+     * 查询最新天气
+     */
+    private void queryWeather(){
+        startRefreshAnimator();
+
         //缓存实现，暂缓实现
 
         weatherPresenter = new WeatherPresenter();
@@ -74,6 +118,7 @@ public class WeatherActivity extends BaseActivity implements WeatherView {
                 .subscribe(new Action1<WeatherResponse>() {
                     @Override
                     public void call(WeatherResponse weatherResponse) {
+                        stopRefreshAnimator();
                         if (weatherResponse.status.equals(WeatherResponse.SUCCESS)) {
                             WeatherForecastInfo today = weatherResponse.results[0].weather_data[0];
                             mDateTV.setText(today.date);
@@ -84,7 +129,7 @@ public class WeatherActivity extends BaseActivity implements WeatherView {
                             mPm25TV.setText("PM2.5：" + weatherResponse.results[0].pm25);
 
                             List<WeatherForecastInfo> forecastInfos = new ArrayList<WeatherForecastInfo>();
-                            for(int i = 1; i < weatherResponse.results[0].weather_data.length; i++){
+                            for (int i = 1; i < weatherResponse.results[0].weather_data.length; i++) {
                                 forecastInfos.add(weatherResponse.results[0].weather_data[i]);
                             }
                             WeatherForecastAdapter forecastAdapter = new WeatherForecastAdapter(forecastInfos);
@@ -93,7 +138,7 @@ public class WeatherActivity extends BaseActivity implements WeatherView {
                             mForeCastRV.setAdapter(forecastAdapter);
 
                             List<WeatherIndex> indexes = new ArrayList<WeatherIndex>();
-                            for(int i = 1; i < weatherResponse.results[0].index.length; i++){
+                            for (int i = 1; i < weatherResponse.results[0].index.length; i++) {
                                 indexes.add(weatherResponse.results[0].index[i]);
                             }
                             WeatherIndexAdapter indexAdapter = new WeatherIndexAdapter(indexes);
@@ -107,14 +152,19 @@ public class WeatherActivity extends BaseActivity implements WeatherView {
                 });
     }
 
-    @Override
-    protected void initView() {
-        super.initView();
-    }
 
-    @Override
-    protected void setListener() {
-        super.setListener();
+
+    private Animation animation;
+    private void startRefreshAnimator(){
+        if(animation == null){
+            animation = AnimationUtils.loadAnimation(context, R.anim.refresh_rotate);
+        }
+        mRefresh.startAnimation(animation);
+    }
+    private void stopRefreshAnimator(){
+        if(animation != null){
+            mRefresh.clearAnimation();
+        }
     }
 
 

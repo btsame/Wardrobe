@@ -31,7 +31,6 @@ public class CameraCore {
     //截取图片的宽度
     public static final int REQUEST_WIDTH = 600;
 
-
     //用来存储照片的URL
     private Uri photoURL;
 
@@ -88,12 +87,15 @@ public class CameraCore {
 
     //拍照
     public void getPhoto2Camera(Uri uri) {
-        activity.startActivityForResult(startTakePhoto(uri), REQUEST_TAKE_PHOTO_CODE);
+        Intent intent = startTakePhoto(uri);
+        if(intent == null) return;
+        activity.startActivityForResult(intent, REQUEST_TAKE_PHOTO_CODE);
     }
 
     //拍照后截屏
     public void getPhoto2CameraCrop(Uri uri) {
         Intent intent = startTakePhoto(uri);
+        if(intent == null) return;
         // intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);//将拍取的照片保存到指定URI
         activity.startActivityForResult(intent, REQUEST_TAKE_PHOTO_CROP_CODE);
     }

@@ -1,64 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:fitsSystemWindows="true">
+    android:orientation="vertical">
+
+    <!-- titleBar -->
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:fitsSystemWindows="true"
+            android:minHeight="?attr/actionBarSize"
+            app:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
 
     <!-- 主体内容 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical">
 
         <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/iv_add_costume_pic"
+            android:id="@+id/sdv_add_costume_pic"
+            style="@style/draweeViewDefault"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            style="@style/draweeViewDefault"
-            app:placeholderImage="@drawable/icon_add"/>
+            app:placeholderImage="@drawable/icon_add" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_add_costume_sort_part"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="2">
 
         </android.support.v7.widget.RecyclerView>
 
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:layout_weight="3">
 
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/ll_button_bar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp">
-                <Button
-                    android:id="@+id/ib_add_costume_create_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:background="@color/colorSpring"
-                    android:text="2013-03"/>
+                android:layout_height="60dp"
+                android:layout_gravity="center">
 
                 <Button
-                    android:id="@+id/ib_add_costume_remark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
+                    android:id="@+id/btn_add_costume_create_time"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/colorSpring"
+                    android:text="2013-03" />
+
+                <Button
+                    android:id="@+id/btn_add_costume_remark"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:background="@color/colorSummer"
-                    android:text="备  注"/>
+                    android:text="备  注" />
+            </LinearLayout>
+
+            <!-- 输入栏 -->
+            <RelativeLayout
+                android:id="@+id/rl_remark_bar"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/iv_remark_ok"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/pic_complete"/>
+
+                <EditText
+                    android:id="@+id/et_remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@android:color/white"
+                    android:layout_toLeftOf="@id/iv_remark_ok"
+                    android:inputType="text"
+                    android:textColorHighlight="@color/darkgray"
+                    android:minWidth="100dp"/>
             </RelativeLayout>
 
-
-        </LinearLayout>
+        </FrameLayout>
 
     </LinearLayout>
 
@@ -68,6 +112,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:src="@drawable/icon_add"/>
+        android:src="@drawable/icon_add" />
 
 </android.support.design.widget.CoordinatorLayout>

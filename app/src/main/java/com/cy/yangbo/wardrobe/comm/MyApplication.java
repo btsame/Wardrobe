@@ -44,6 +44,7 @@ public class MyApplication extends Application{
                 .name("wardrobe.realm")
                 .schemaVersion(1)
                //.encryptionKey(key)
+                .deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(configuration);
     }

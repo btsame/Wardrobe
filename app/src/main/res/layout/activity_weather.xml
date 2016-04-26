@@ -4,17 +4,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:fitsSystemWindows="true"
+            android:minHeight="?attr/actionBarSize"
+            app:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical">
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:layout_marginBottom="20dp"
             app:cardBackgroundColor="@android:color/white"
-            app:cardElevation="10dp">
+            app:cardElevation="5dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -25,8 +44,8 @@
                     android:id="@+id/ll_today_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_centerHorizontal="true">
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center">
 
                     <TextView
                         android:id="@+id/tv_weather_date"
@@ -36,16 +55,16 @@
                         android:gravity="center"
                         android:text="日期"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/text_size_60"/>
+                        android:textSize="@dimen/text_size_60" />
 
 
                     <ImageView
                         android:id="@+id/iv_weather_refresh"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:layout_toRightOf="@id/tv_weather_date"
                         android:layout_marginLeft="10dp"
-                        android:src="@drawable/icon_refresh"/>
+                        android:layout_toRightOf="@id/tv_weather_date"
+                        android:src="@drawable/icon_refresh" />
 
                 </LinearLayout>
 
@@ -60,13 +79,14 @@
                         android:id="@+id/sdv_weather_icon"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
-                        android:layout_centerVertical="true"/>
-                    
+                        android:layout_centerVertical="true" />
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="120dp"
                         android:layout_margin="20dp"
                         android:orientation="vertical">
+
                         <TextView
                             android:id="@+id/tv_weather_weather"
                             android:layout_width="wrap_content"
@@ -74,7 +94,7 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:text="天气"
-                            android:textSize="@dimen/text_size_45"/>
+                            android:textSize="@dimen/text_size_45" />
 
                         <TextView
                             android:id="@+id/tv_weather_wind"
@@ -83,7 +103,7 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:text="风力"
-                            android:textSize="@dimen/text_size_45"/>
+                            android:textSize="@dimen/text_size_45" />
 
                         <TextView
                             android:id="@+id/tv_weather_temperature"
@@ -92,7 +112,7 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:text="温度"
-                            android:textSize="@dimen/text_size_45"/>
+                            android:textSize="@dimen/text_size_45" />
 
                         <TextView
                             android:id="@+id/tv_weather_pm25"
@@ -101,7 +121,7 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:text="pm2.5"
-                            android:textSize="@dimen/text_size_45"/>
+                            android:textSize="@dimen/text_size_45" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -113,8 +133,9 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_weather_forecast"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
             android:layout_weight="1">
 
         </android.support.v7.widget.RecyclerView>
@@ -126,17 +147,17 @@
         android:id="@+id/ll_weather_bottomsheet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_behavior="@string/bottom_sheet_behavior"
+        android:background="@color/black_translucent"
+        android:orientation="vertical"
         app:behavior_hideable="false"
         app:behavior_peekHeight="20dp"
-        android:background="@color/black_translucent"
-        android:orientation="vertical">
+        app:layout_behavior="@string/bottom_sheet_behavior">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:src="@drawable/arrow_up_gray"
-            android:scaleType="centerInside"/>
+            android:scaleType="centerInside"
+            android:src="@drawable/arrow_up_gray" />
 
 
         <android.support.v7.widget.RecyclerView

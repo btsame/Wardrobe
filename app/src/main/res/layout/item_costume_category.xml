@@ -13,6 +13,6 @@
         android:textSize="@dimen/text_size_54"
         android:textColor="@color/orange"
         android:text="衬衣"
-        android:background="@drawable/item_costume_category_bg"/>
+        android:background="@drawable/item_costume_category_selector"/>
 
 </android.support.v7.widget.CardView>
